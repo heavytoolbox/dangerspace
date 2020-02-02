@@ -1,0 +1,107 @@
+{
+    "name": "drupal/recommended-project",
+    "description": "Project template for Drupal 8 projects with a relocated document root",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/drupal",
+    "support": {
+        "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
+        "chat": "https://www.drupal.org/node/314178"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    ],
+    "require": {
+        "composer/installers": "^1.2",
+        "drupal/add_to_head": "1.x-dev",
+        "drupal/address": "^1.7",
+        "drupal/admin_toolbar": "^2.0",
+        "drupal/asset_injector": "^2.4",
+        "drupal/auto_entitylabel": "^3.0@beta",
+        "drupal/backup_migrate": "^4.1",
+        "drupal/bootstrap": "^3.21",
+        "drupal/business_rules": "^1.0@beta",
+        "drupal/conditional_fields": "^1.0@alpha",
+        "drupal/core-composer-scaffold": "^8.8",
+        "drupal/core-project-message": "^8.8",
+        "drupal/core-recommended": "^8.8",
+        "drupal/ctools": "^3.2",
+        "drupal/ds": "^3.4",
+        "drupal/formblock": "^1.0@beta",
+        "drupal/geofield": "^1.8",
+        "drupal/geolocation": "3.x-dev",
+        "drupal/google_analytics": "^3.0",
+        "drupal/honeypot": "^1.29",
+        "drupal/letsencrypt": "^1.4",
+        "drupal/mailsystem": "^4.1",
+        "drupal/media_entity_remote_image": "^1.0@alpha",
+        "drupal/metatag": "1.x-dev",
+        "drupal/mimemail": "^1.0@alpha",
+        "drupal/pathauto": "^1.6",
+        "drupal/rules": "^3.0@alpha",
+        "drupal/rules_token": "^1.1",
+        "drupal/simple_redirect": "^1.0",
+        "drupal/smtp": "^1.0@beta",
+        "drupal/social_api": "2.0-rc1",
+        "drupal/social_auth": "^2.0",
+        "drupal/social_auth_facebook": "^1.0",
+        "drupal/social_auth_google": "^1.0",
+        "drupal/social_auth_twitter": "^1.0@beta",
+        "drupal/token": "^1.5",
+        "drupal/typed_data": "^1.0@alpha",
+        "drupal/views_data_export": "^1.0@beta",
+        "drupal/webform": "^5.4",
+        "drush/drush": "^10.2",
+        "yourivw/leclient": "^1.1",
+        "zaporylie/composer-drupal-optimizations": "^1.0"
+    },
+    "require-dev": {
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            }
+        },
+        "installer-paths": {
+            "web/core": ["type:drupal-core"],
+            "web/libraries/{$name}": ["type:drupal-library"],
+            "web/modules/contrib/{$name}": ["type:drupal-module"],
+            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
+            "web/themes/contrib/{$name}": ["type:drupal-theme"],
+            "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+            "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+            "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        },
+        "drupal-core-project-message": {
+            "include-keys": ["homepage", "support"],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                         </>",
+                "<bg=blue;fg=white>  Congratulations, you’ve installed the Drupal codebase  </>",
+                "<bg=blue;fg=white>  from the drupal/recommended-project template!          </>",
+                "<bg=blue;fg=white>                                                         </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+
+                "  * Install the site: https://www.drupal.org/docs/8/install",
+                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
+                "  * Get support: https://www.drupal.org/support",
+                "  * Get involved with the Drupal community:",
+                "      https://www.drupal.org/getting-involved",
+                "  * Remove the plugin that prints this message:",
+                "      composer remove drupal/core-project-message"
+            ]
+        }
+    }
+}

@@ -1,0 +1,12 @@
+name: Letsencrypt
+type: module
+description: https://letsencrypt.org/getting-started/.
+# core: 8.x
+package: Synapse
+dependencies:
+  - idna:idna
+# Information added by Drupal.org packaging script on 2018-10-26
+version: '8.x-1.4'
+core: '8.x'
+project: 'letsencrypt'
+datestamp: 1540540983

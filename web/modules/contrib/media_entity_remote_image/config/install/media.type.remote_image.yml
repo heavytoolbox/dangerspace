@@ -1,0 +1,19 @@
+uuid: 86e50550-704e-472c-bdd2-63d9d160a0b8
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity_remote_image
+_core:
+  default_config_hash: TqN63JaRRQpZYgAvPqM5N9dfjagKoXK5HLBMNK01ElY
+id: remote_image
+label: 'Remote image'
+description: 'Remote image media type'
+source: remote_image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_remote_image_url
+field_map:
+  shortcode: name
+  username: name
