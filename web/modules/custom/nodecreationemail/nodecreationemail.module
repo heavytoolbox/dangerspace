@@ -1,0 +1,75 @@
+<?php
+
+/**
+ * @file
+ * Contains nodecreationemail.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function nodecreationemail_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the nodecreationemail module.
+    case 'help.page.nodecreationemail':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('How to send an email programmatically') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+/**
+ * Implements hook_mail().
+ */
+function nodecreationemail_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+
+  switch ($key) {
+    case 'create_incident':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('[dangerspace] Incident @title', array('@title' => $params['node_title'],'@date' => $params['field_date']), $options);
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
+
+/**
+ * Implements hook_entity_insert().
+ */
+function nodecreationemail_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+
+  if ($entity->getEntityTypeId() !== 'node' || ($entity->getEntityTypeId() === 'node' && $entity->bundle() !== 'incident')) {
+    return;
+  }
+
+  $mailManager = \Drupal::service('plugin.manager.mail');
+
+  $module = 'nodecreationemail';
+  $key = 'create_incident';
+  $to = $entity->get('field_email')->value;
+$params['message'] = $entity->toUrl('canonical', ['absolute' => TRUE])->toString();
+  $params['node_title'] = $entity->label();
+  $langcode = \Drupal::currentUser()->getPreferredLangcode();
+// Check if email has been included on submission
+if ($entity->hasField('field_email')
+  && !$entity->get('field_email')->isEmpty()) {
+ $send = true;
+}  
+
+  $result = $mailManager->mail($module, $key, $to, $langcode, $params, NULL, $send);
+  if ($result['result'] !== true) {
+    drupal_set_message(t('Thanks for your submitting your incident, and we hope you\'re alright. Please spread the word about this siteand follow us on Twitter <a href=\'https://asds\'>@dangerspacenz</a>'));
+  }
+  else {
+    drupal_set_message(t('Thanks for your submitting your incident, and we hope you\'re alright. Please spread the word about this site, you can also follow us on Twitter <a href=\'https://asds\'>@dangerspacenz</a>, and we\'ve sent you an email.'));
+  }
+
+}

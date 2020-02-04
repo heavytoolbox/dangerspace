@@ -1,0 +1,5 @@
+name: Node creation email
+type: module
+description: Sends a email to field on node creation of a certain content (incident)
+core: 8.x
+package: Custom

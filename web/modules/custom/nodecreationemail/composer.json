@@ -1,0 +1,14 @@
+{
+  "name": "drupal/nodecreationemail",
+  "type": "drupal-module",
+  "description": "How to send an email programmatically",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "",
+    "source": ""
+  },
+  "require": { }
+}
