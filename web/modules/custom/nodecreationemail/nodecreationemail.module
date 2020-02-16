@@ -35,7 +35,8 @@ function nodecreationemail_mail($key, &$message, $params) {
   switch ($key) {
     case 'create_incident':
       $message['from'] = \Drupal::config('system.site')->get('mail');
-      $message['subject'] = t('[dangerspace] Incident @title', array('@title' => $params['node_title'],'@date' => $params['field_date']), $options);
+    $message['reply-to'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('[dangerspace] Incident @title', array('@title' => $params['node_title']), $options);
       $message['body'][] = $params['message'];
       break;
   }
@@ -69,7 +70,7 @@ if ($entity->hasField('field_email')
     drupal_set_message(t('Thanks for your submitting your incident, and we hope you\'re alright. Please spread the word about this siteand follow us on Twitter <a href=\'https://asds\'>@dangerspacenz</a>'));
   }
   else {
-    drupal_set_message(t('Thanks for your submitting your incident, and we hope you\'re alright. Please spread the word about this site, you can also follow us on Twitter <a href=\'https://asds\'>@dangerspacenz</a>, and we\'ve sent you an email.'));
+    drupal_set_message(t('Thanks for your submitting your incident, and we hope you\'re alright. Please spread the word about this site, you can also follow us on Twitter <a href=\'https://twitter.com/dangerspacenz\'>@dangerspacenz</a>, and we\'ve sent you an email.'));
   }
 
 }
